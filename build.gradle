@@ -16,7 +16,7 @@ dependencies {
     testCompile "junit:junit:$junit_version"
     testCompile "io.cucumber:cucumber-core:$cucumber_version"
     testCompile "io.cucumber:cucumber-java8:$cucumber_version"
-    testCompile "io.cucumber:cucumber-junit:$cucumber_version"
+    //testCompile "io.cucumber:cucumber-junit:$cucumber_version"
 
 }
 
@@ -44,7 +44,7 @@ task cucumber() {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ["--plugin", "pretty", "--glue", "hellocucumber" , "src/test/resources"]
+            args = ["--plugin", "html:build/cucumber", "--glue", "hellocucumber" , "src/test/resources"]
         }
     }
 }
