@@ -19,12 +19,12 @@ public class MyStepdefs implements En {
             this.cartAmount = cartAmount;
         });
 
-        And("^Стандартная {int}$", (Integer deliveryAmount) -> {
+        And("Стоимость доствки {int}", (Integer deliveryAmount) -> {
             this.deliveryAmount = deliveryAmount;
         });
 
         When("Проводим расчет", () -> {
-            //
+
         });
 
         Then("Получаем {int}", (Integer orderAmount) -> {
