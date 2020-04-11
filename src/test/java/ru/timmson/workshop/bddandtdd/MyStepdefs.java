@@ -24,7 +24,7 @@ public class MyStepdefs implements En {
         });
 
         When("Проводим расчет", () -> {
-
+            this.orderAmount  = Client.forType(clientType).calc(cartAmount, deliveryAmount);
         });
 
         Then("Получаем {int}", (Integer orderAmount) -> {
