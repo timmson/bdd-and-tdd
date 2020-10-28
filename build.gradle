@@ -1,8 +1,13 @@
 apply plugin: "java"
+apply plugin: "idea"
 
 group = "ru.timmson.workshops.bddandtdd"
 version = "1.0"
-sourceCompatibility = "11"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -13,16 +18,17 @@ repositories {
 
 dependencies {
 
-    testCompile "junit:junit:$junit_version"
-    testCompile "io.cucumber:cucumber-core:$cucumber_version"
-    testCompile "io.cucumber:cucumber-java8:$cucumber_version"
+    testCompile "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    testCompile "io.cucumber:cucumber-java:$cucumber_version"
     testCompile "io.cucumber:cucumber-junit:$cucumber_version"
+    testCompile "io.cucumber:cucumber-junit-platform-engine:$cucumber_version"
 
 }
 
 buildscript {
-    ext.junit_version = "4.13"
-    ext.cucumber_version = "5.6.0"
+    ext.junit_version = "5.7.0"
+    ext.cucumber_version = "6.8.1"
 }
 
 configurations {
@@ -36,4 +42,9 @@ configurations {
     cucumberRuntime {
         extendsFrom testImplementation
     }
+}
+
+test {
+    systemProperty("cucumber.publish.quiet", "true")
+    useJUnitPlatform()
 }
