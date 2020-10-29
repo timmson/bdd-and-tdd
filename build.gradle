@@ -21,13 +21,11 @@ repositories {
 dependencies {
 
     compile "org.springframework.boot:spring-boot-starter-web"
-    testCompile ("org.springframework.boot:spring-boot-starter-test") {
-        exclude group: "org.junit.vintage", module: "junit-vintage-engine"
-    }
-
 
     testCompile "org.junit.jupiter:junit-jupiter-api:$junit_version"
-    testCompile "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    testCompile "org.junit.platform:junit-platform-commons:$junit_platform_version"
+
     testCompile "io.cucumber:cucumber-java:$cucumber_version"
     testCompile "io.cucumber:cucumber-junit:$cucumber_version"
     testCompile "io.cucumber:cucumber-junit-platform-engine:$cucumber_version"
@@ -36,6 +34,7 @@ dependencies {
 
 buildscript {
     ext.junit_version = "5.7.0"
+    ext.junit_platform_version = "1.7.0"
     ext.cucumber_version = "6.8.1"
 
     repositories {
