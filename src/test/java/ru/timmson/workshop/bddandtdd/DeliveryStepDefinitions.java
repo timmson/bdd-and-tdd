@@ -8,14 +8,14 @@ import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MyStepDefinitions {
+public class DeliveryStepDefinitions {
 
     String clientType;
     Integer deliveryAmount;
     Integer cartAmount;
     Integer orderAmount = 0;
 
-    private RestTemplate restTemplate = new RestTemplate();
+    final private RestTemplate restTemplate = new RestTemplate();
 
     @Дано("{string} и {int}")
     public void given(String clientType, Integer cartAmount) {
