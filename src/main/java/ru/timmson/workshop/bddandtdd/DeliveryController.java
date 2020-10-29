@@ -7,15 +7,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DeliveryController {
 
-    private DeliveryService deliveryService;
-
-    public DeliveryController(DeliveryService deliveryService) {
-        this.deliveryService = deliveryService;
-    }
-
     @GetMapping("/delivery/{clientType}/{cartAmount}/")
     public Integer calculate(@PathVariable("clientType") String clientType,
-                          @PathVariable("cartAmount") String cartAmount) {
-        return deliveryService.calculate(clientType, cartAmount);
+                             @PathVariable("cartAmount") Integer cartAmount) {
+
+        if (clientType.equals("VIP")) {
+            if (cartAmount >= 2500) {
+                return Double.valueOf(cartAmount * 0.95).intValue();
+            } else {
+                return cartAmount;
+            }
+        } else if (clientType.equals("Обычный")) {
+            if (cartAmount > 1000) {
+                return cartAmount;
+            } else {
+                return cartAmount + 250;
+            }
+        } else {
+
+        }
+
+        return 0;
     }
 }
