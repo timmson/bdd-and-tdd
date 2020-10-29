@@ -1,4 +1,4 @@
-package ru.timmson.workshop.bddandtdd;
+package ru.timmson.workshop.bddandtdd.client;
 
 class VipClient extends Client {
 

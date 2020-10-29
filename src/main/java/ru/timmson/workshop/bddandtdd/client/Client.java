@@ -1,6 +1,6 @@
-package ru.timmson.workshop.bddandtdd;
+package ru.timmson.workshop.bddandtdd.client;
 
-class Client {
+public class Client {
 
     protected Client() {
 

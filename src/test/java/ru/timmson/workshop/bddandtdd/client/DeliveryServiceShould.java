@@ -1,4 +1,4 @@
-package ru.timmson.workshop.bddandtdd;
+package ru.timmson.workshop.bddandtdd.client;
 
 import org.junit.jupiter.api.Test;
 

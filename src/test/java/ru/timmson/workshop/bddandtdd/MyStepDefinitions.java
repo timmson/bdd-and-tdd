@@ -4,6 +4,7 @@ import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
+import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,6 +14,8 @@ public class MyStepDefinitions {
     Integer deliveryAmount;
     Integer cartAmount;
     Integer orderAmount = 0;
+
+    private RestTemplate restTemplate = new RestTemplate();
 
     @Дано("{string} и {int}")
     public void given(String clientType, Integer cartAmount) {
@@ -27,7 +30,7 @@ public class MyStepDefinitions {
 
     @Когда("Проводим расчет")
     public void when() {
-        this.orderAmount = Client.forType(clientType).calc(cartAmount, deliveryAmount);
+        this.orderAmount = restTemplate.getForObject("http://localhost:8080/delivery/" + clientType + "/" + cartAmount + "/", Integer.class);
     }
 
     @Тогда("Получаем {int}")
