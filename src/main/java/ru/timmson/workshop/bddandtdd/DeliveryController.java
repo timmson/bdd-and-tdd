@@ -18,7 +18,7 @@ public class DeliveryController {
                 return cartAmount;
             }
         } else if (clientType.equals("Обычный")) {
-            if (cartAmount > 1000) {
+            if (cartAmount >= 1000) {
                 return cartAmount;
             } else {
                 return cartAmount + 250;
