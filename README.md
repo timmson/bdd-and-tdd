@@ -15,14 +15,14 @@ They worked hard some months and wrote acceptance tests._
 
 ---
 
-Observe:
+### Observe
 1. Go to ```legacy-code``` branch.
 1. Observe ```src/main/java/ru/timmson/workshop/bddandtdd/DeliveryContoller``` and ```src/test/resources/deliver.feature```.
 1. Run ```src/main/java/ru/timmson/workshop/bddandtdd/Application```.
 1. Open in a browser [http://localhost:8080](http://localhost:8080).
 1. Run ```src/test/resources/deliver.feature```.
 
-Refactor:
+### Refactor
 1. Add TDD ```DeliveryServiceShould``` and create ```DeliverService```.
 ```java
     @Test
