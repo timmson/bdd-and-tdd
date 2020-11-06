@@ -23,6 +23,20 @@ They worked hard some months and wrote acceptance tests._
 1. Run ```src/test/resources/deliver.feature```.
 
 ### Refactoring
+1. Add SrpingTest:
+```java
+    @SpringBootTest(webEnvironment= WebEnvironment.RANDOM_PORT)
+    public class DeliveryServiceApprovalTest {
+    
+        @Autowired
+        DeliveryController deliveryController;
+    
+        @Test
+        void vipClientShouldNotPayForDelivery() {
+            assertEquals(Integer.valueOf(2499), deliveryController.calculate("VIP", 2499));
+        }
+    }
+```
 1. Add TDD ```DeliveryServiceShould``` and create ```DeliverService```.
 ```java
     @Test

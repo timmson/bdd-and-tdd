@@ -9,12 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.ServerResponse;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-import static org.mockito.Mockito.*;
 import static org.springframework.web.servlet.function.RequestPredicates.GET;
 import static org.springframework.web.servlet.function.RouterFunctions.route;
 import static org.springframework.web.servlet.function.ServerResponse.ok;
@@ -32,21 +26,5 @@ public class Application {
         return route(GET("/"), request -> ok().contentType(MediaType.TEXT_HTML).body(html));
     }
 
-    @Bean
-    public DataSource dataSource() throws Exception {
-        final var ds = mock(DataSource.class);
-        final var connection = mock(Connection.class);
-        final var preparedStatement = mock(PreparedStatement.class);
-        final var resultSet = mock(ResultSet.class);
-
-        when(ds.getConnection()).thenReturn(connection);
-        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
-        when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        when(resultSet.next()).thenReturn(true);
-        when(resultSet.getInt(0)).thenReturn(2500);
-        when(resultSet.getInt(1)).thenReturn(5);
-
-        return ds;
-    }
 }
 

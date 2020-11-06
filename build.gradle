@@ -1,7 +1,23 @@
-apply plugin: "java"
-apply plugin: "idea"
-apply plugin: "org.springframework.boot"
-apply plugin: "io.spring.dependency-management"
+buildscript {
+    ext.spring_version = "5.2.10.RELEASE"
+    ext.junit_version = "5.7.0"
+    ext.junit_platform_version = "1.7.0"
+    ext.cucumber_version = "6.8.1"
+
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+}
+
+plugins {
+    id "java"
+    id "idea"
+    id "org.springframework.boot" version "2.3.5.RELEASE"
+    id "io.spring.dependency-management" version "1.0.10.RELEASE"
+}
 
 group = "ru.timmson.workshops.bddandtdd"
 version = "1.0"
@@ -23,6 +39,11 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.mockito:mockito-core:3.6.0"
 
+    testCompile("org.springframework.boot:spring-boot-test") {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testCompile "org.springframework:spring-test:$spring_version"
+
     testCompile "org.junit.jupiter:junit-jupiter-api:$junit_version"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
     testCompile "org.junit.platform:junit-platform-commons:$junit_platform_version"
@@ -31,23 +52,6 @@ dependencies {
     testCompile "io.cucumber:cucumber-junit:$cucumber_version"
     testCompile "io.cucumber:cucumber-junit-platform-engine:$cucumber_version"
 
-}
-
-buildscript {
-    ext.junit_version = "5.7.0"
-    ext.junit_platform_version = "1.7.0"
-    ext.cucumber_version = "6.8.1"
-
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE"
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
-    }
 }
 
 configurations {

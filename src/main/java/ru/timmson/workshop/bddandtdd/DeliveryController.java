@@ -14,9 +14,6 @@ import java.sql.SQLException;
 @RestController
 public class DeliveryController {
 
-    @Autowired
-    DataSource ds;
-
     @GetMapping("/delivery/{clientType}/{cartAmount}/")
     public Integer calculate(@PathVariable("clientType") String t,
                              @PathVariable("cartAmount") Integer am) {
@@ -25,7 +22,8 @@ public class DeliveryController {
 
         if (t.equals("VIP")) {
             /**
-             * Перенести в общую таюлицу
+             * TODO
+             * Перенести в общую таблицу
              * @see TM-311
              */
             sql = "SELECT c.discount_amount, c.discount_percent FROM config_table c, client_type t " +
@@ -36,7 +34,8 @@ public class DeliveryController {
             ResultSet rs = null;
 
             try {
-                conn = ds.getConnection();
+                DataSource d = OracleDataSource.create("admin", "p1ssword", "ORCL_PROD_DB1");
+                conn = d.getConnection();
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, t);
                 rs = ps.executeQuery();
@@ -57,7 +56,7 @@ public class DeliveryController {
                     if (ps != null) ps.close();
                     if (conn != null) conn.close();
                 } catch (SQLException ignore) {
-                    //
+                    //ignore.printStackTrace();
                 }
             }
 
@@ -68,7 +67,11 @@ public class DeliveryController {
                 return am + 250;
             }
         } else {
-
+            try {
+                throw new Exception("Client is not found" + t);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return 0;
