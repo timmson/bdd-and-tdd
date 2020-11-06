@@ -23,7 +23,7 @@ They worked hard some months and wrote acceptance tests._
 1. Run ```src/test/resources/deliver.feature```.
 
 ### Refactoring
-1. Add SrpingTest:
+1. Add SpringTest:
 ```java
     @SpringBootTest(webEnvironment= WebEnvironment.RANDOM_PORT)
     public class DeliveryServiceApprovalTest {
