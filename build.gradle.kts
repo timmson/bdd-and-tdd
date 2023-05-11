@@ -11,6 +11,7 @@ val springVersion: String by project
 val springBootVersion: String by project
 val junitVersion: String by project
 val junitPlatformVersion: String by project
+val mockitoVersion: String by project
 val cucumberVersion: String by project
 
 repositories {
@@ -19,6 +20,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.mockito:mockito-core:$mockitoVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
